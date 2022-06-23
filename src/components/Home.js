@@ -9,18 +9,20 @@ const Home = () => {
     const navigate = useNavigate();
 
     // Get dispatch from the UserContext in order to store data locally
-    const { dispatch } = useContext(UserContext);
+    const { dispatch, usersList } = useContext(UserContext);
 
     // Get request for users
-    axios.get('https://jsonplaceholder.typicode.com/users').then(result => {
-        for(let item of result.data) {
-            item['role'] = "Employee"
-        }
-        dispatch({
-            type: 'GET_USERS',
-            usersList: result.data
+    if(usersList.length === 0) {
+        axios.get('https://jsonplaceholder.typicode.com/users').then(result => {
+            for (let item of result.data) {
+                item['role'] = 'Employee'
+            }
+            dispatch({
+                type: 'GET_USERS',
+                usersList: result.data
+            })
         })
-    })
+    }
 
     // On click of Users button
     const loadUsers = () => {

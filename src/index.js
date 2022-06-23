@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import UserContextProvider from './contexts/UserContext';
+import RoleContextProvider from './contexts/RoleContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserContextProvider>
-      <App />
+      <RoleContextProvider>
+        <App />
+      </RoleContextProvider>
     </UserContextProvider>
   </React.StrictMode>
 );
